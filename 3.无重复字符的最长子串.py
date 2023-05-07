@@ -6,21 +6,23 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        partion_s = []
+        partion_s = ''
         length = 0
-        #初始化，同时考虑字符串为空的情况
+        # 初始化，同时考虑字符串为空的情况
         while s:
             first_str = s[0]
-            s = s[1: ]
+            s = s[1:]
 
             if first_str not in partion_s:
-                partion_s.append(first_str)
+                partion_s += first_str
                 length = max(length, len(partion_s))
-            # 问题：不止要判断新来的字符串在不在partion_s中，还要判断它在partion_s中的哪一位，需要保留后边的部分
+
             else:
-                partion_s = [first_str]
+                # 这种情况下，最大最字符串长度肯定是减的，所以不需要寻找其中的最大值
+                partion_s = partion_s.split(first_str)[-1]+first_str
 
         return length
 
-
-
+a = Solution()
+a.lengthOfLongestSubstring('aab')
+print('abc'.split('b'))
