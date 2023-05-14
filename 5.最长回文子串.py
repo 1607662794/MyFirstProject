@@ -18,6 +18,7 @@ class Solution(object):
             for i in range(len(self.s) - 1):
                 j = i + 1
                 # 从内到外判断的初始条件，只有当他们相等的时候才能继续进行下一步
+                # 判断索引是不是还在字符串范围内
                 while i >= 0 and j < len(self.s) and self.s[i] == self.s[j]:
                     # 记录最长回文子串
                     if self.length < len(self.s[i:j + 1]):
@@ -26,7 +27,7 @@ class Solution(object):
                         self.tail = j
                     i -= 1
                     j += 1
-                    # 判断索引是不是还在字符串范围内
+
 
 
             for i in range(len(self.s) - 2):
