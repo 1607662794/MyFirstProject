@@ -4,6 +4,12 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        '''我的思路是，先构造一个数据链表，用于存储我们需要的这种数据'''
-
-        '''通过嵌套两重循环来遍历数据，查询哪种组合的面积最大'''
+        '''一个新的思路，双重循环解决，但是超时版'''
+        max_area = 0
+        for i in range(len(height)):
+            for j in range(i + 1, len(height)):
+                if min(height[i], height[j]) * (j - i) > max_area:
+                    max_area = min(height[i], height[j]) * (j - i)
+        return max_area
+a = Solution()
+print(a.maxArea([1,8,6,2,5,4,8,3,7]))
