@@ -1,22 +1,27 @@
 class Solution(object):
-    def intToRoman(self, num):
+    def romanToInt(self, s):
         """
-        :type num: int
-        :rtype: str
+        :type s: str
+        :rtype: int
         """
-        rule = {1: 'I', 5: 'V', 10: 'X', 50: "L", 100: 'C', 500: 'D', 1000: 'M'}
-
-        # 分成两部分进行考虑，一部分是1,10,100,1000，另一部分是5,50,500，其实更好的方式是将所有的数字都给列出来，暴力求解
-        keys = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
-        values = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']
-        Roamn = ''
-
-        for i in range(len(keys) - 1, -1, -1):
-            res = num // keys[i]
-            num %= keys[i]
-            Roamn += values[i] * (res)
-        return Roamn
+        # 列出所有规则的字典，让字符串从右往左开始寻找
+        keys = [1,4,5,9,10,40,50,90,100,400,500,900,1000]
+        values = ['I','IV','V','IX','X','XL','L','XC','C','CD','D','CM','M']
+#         rule = dict(zip(keys, values))
+        num = 0
+        i = len(keys)-1
+        while i < 0:
+            if s[-1] == values[i]:#这儿注意索引和切片的区别
+                s = s[:-1]
+                num += keys[i]
+            elif s[-2:] == values[i]:
+                s = s[:-2]
+                num += keys[i]
+                i -= 2
+            else:
+                i -= 1
+        return num
 
 
 a = Solution()
-a.intToRoman(1994)
+a.romanToInt("III")
