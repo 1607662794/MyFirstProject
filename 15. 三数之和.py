@@ -11,17 +11,14 @@ class Solution(object):
         for i in range(len(nums) - 2):  # 先定一个点
             j = i + 1
             z = len(nums) - 1
-            if nums[i] * nums[z] > 0:  # 这种情况，神仙来了也救不了
-                continue
-            else:
-                while j < z:
-                    if nums[i] + nums[j] + nums[z] < 0:  # 因为小于零，所以需要往大了找
-                        j = j + 1
-                    elif nums[i] + nums[j] + nums[z] > 0:  # 因为大于零，所以需要往小了找
-                        z = z - 1
-                    else:
-                        if [nums[i], nums[j], nums[z]] not in three_tuple:
-                            three_tuple.append([nums[i], nums[j], nums[z]])
+            while j < z:
+                if nums[i] + nums[j] + nums[z] < 0:  # 因为小于零，所以需要往大了找
+                    j = j + 1
+                elif nums[i] + nums[j] + nums[z] > 0:  # 因为大于零，所以需要往小了找
+                    z = z - 1
+                else:
+                    if [nums[i], nums[j], nums[z]] not in three_tuple:
+                        three_tuple.append([nums[i], nums[j], nums[z]])
                         j = j + 1  # 因为等于零，所以需要往小和往大了找
                         z = z - 1
         return three_tuple
