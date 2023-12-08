@@ -1,5 +1,6 @@
 # Definition for singly-linked list.
 # 本题的思路是：利用链表的性质，首先先定位一个头结点，然后使最后生成的链表依次往后滑，不断生成与新增，对于链表1和2的判断，采用两个头节点，每次小的或者另外一个链表已经到达末尾后，链表的头指针依次往后滑，列表同理
+# 官方解法是通过递归的思想，每次返回一个节点即可
 class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
