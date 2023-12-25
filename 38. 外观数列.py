@@ -7,7 +7,7 @@ class Solution(object):
         :rtype: str
         """
         s = '1'
-        while n-1 > 0:
+        while n - 1 > 0:
             s = self.appearance_sequence(s)
             n = n - 1
         return s
@@ -15,11 +15,11 @@ class Solution(object):
     def appearance_sequence(self, s):  # 描述前一项，
         i = 0
         new_s = ''
-        while i < len(s) - 1:#
+        while i < len(s) - 1:  #
             if s[i] != s[i + 1]:
                 new_s = new_s + '1' + s[i]
                 i += 1
-            elif i+2 <= len(s)-1 and s[i] == s[i + 2]:
+            elif i + 2 <= len(s) - 1 and s[i] == s[i + 2]:
                 new_s = new_s + "3" + s[i]
                 i += 3
             else:
@@ -28,6 +28,7 @@ class Solution(object):
         if i == len(s) - 1:
             new_s = new_s + '1' + s[i]
         return new_s
+
 
 solution = Solution()
 print(solution.countAndSay(6))
