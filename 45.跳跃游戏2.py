@@ -25,4 +25,4 @@ class Solution(object):
 
 
 solution = Solution()
-print(solution.jump([2, 3, 1, 1, 4]))
+print(solution.jump([2,3,0,1,4]))
