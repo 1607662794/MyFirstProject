@@ -1,4 +1,5 @@
 # 对于这道题的思路，主要使用回溯的方法，对于每一行上的皇后，我在剩下的不同列中找到符合要求的皇后放置位置，然后整体采用暴力回溯方法进行求解。
+# 参照代码随想录的思想，也就是按照树的思路进行求解
 class Solution(object):
     def solveNQueens(self, n):
         """
@@ -44,7 +45,7 @@ class Solution(object):
                 if not isVaild(board, row, col):
                     continue
                 board[row][col] = 'Q'
-                backtracking(board, row + 1, n)  # 每次都忘记这个公式，得好好记一下
+                backtracking(board, row + 1, n)  # 回溯法的模板，一定要记住了
                 board[row][col] = '.'
 
         backtracking(board, 0, n)
