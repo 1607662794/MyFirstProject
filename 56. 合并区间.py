@@ -7,9 +7,8 @@ class Solution(object):
         """
         if len(intervals) <= 1:
             return intervals
-        #首先进行列表的排序
+        # 首先进行列表的排序
         intervals = sorted(intervals, key=lambda intervals: intervals[0])
-
 
         current_interval = intervals[0]
         result = []
@@ -19,13 +18,17 @@ class Solution(object):
                 continue
             elif i >= 1 and intervals[i] == intervals[i - 1] and i == len(intervals) - 1:
                 result.append(current_interval)
-            elif intervals[i][0] >= current_interval[0] and intervals[i][1] <= current_interval[1] and i != len(intervals) - 1:  # 后一个区间完全在前一个区间内部。
+            elif intervals[i][0] >= current_interval[0] and intervals[i][1] <= current_interval[1] and i != len(
+                    intervals) - 1:  # 后一个区间完全在前一个区间内部。
                 continue
-            elif intervals[i][0] >= current_interval[0] and intervals[i][1] <= current_interval[1] and i == len(intervals) - 1:  # 后一个区间完全在前一个区间内部。
+            elif intervals[i][0] >= current_interval[0] and intervals[i][1] <= current_interval[1] and i == len(
+                    intervals) - 1:  # 后一个区间完全在前一个区间内部。
                 result.append(current_interval)
-            elif intervals[i][0] <= current_interval[1] and i != len(intervals) - 1:  # 后一个区间插入了前一个区间的部分，此时当前区间仅进行更新就好，但不需要添加进结果里面。
+            elif intervals[i][0] <= current_interval[1] and i != len(
+                    intervals) - 1:  # 后一个区间插入了前一个区间的部分，此时当前区间仅进行更新就好，但不需要添加进结果里面。
                 current_interval[1] = intervals[i][1]
-            elif intervals[i][0] <= current_interval[1] and i == len(intervals) - 1:  # 后一个区间插入了前一个区间的部分，此时当前区间进行更新，需要添加进结果里面。
+            elif intervals[i][0] <= current_interval[1] and i == len(
+                    intervals) - 1:  # 后一个区间插入了前一个区间的部分，此时当前区间进行更新，需要添加进结果里面。
                 current_interval[1] = intervals[i][1]
                 result.append(current_interval)
             else:  # 其余情况为，后一个区间没有插入前一个区间，此时直接将当前区间插入结果就好，并对当前区间进行更新。
