@@ -1,4 +1,5 @@
 # 我的思路是定义一个函数，这个函数的功能在于在一个子字符串中寻找一定数量的IP地址的子串，每一次传入函数中的，不只有所需子串数量，还有已经组好的子串，这样就解决了每次需要复制的问题。
+# LeeCode中的解法是将字符串划分成了4段，然后进行满足要求的回溯。
 class Solution(object):
     def restoreIpAddresses(self, s):
         """
@@ -18,27 +19,27 @@ class Solution(object):
                 return
             elif s[head] == '0':
                 if substring == "":
-                    substring = substring + s[head]
+                    substring = '0'
                 else:
-                    substring = substring + "." + s[head]
+                    substring = substring + "." + '0'
                 backtrace(substring, number - 1, head + 1, tail)
             else:
                 if substring == "":
-                    backtrace(substring + s[head], number - 1, head + 1, tail)
+                    backtrace(s[head], number - 1, head + 1, tail)
                 else:
                     backtrace(substring + "." + s[head], number - 1, head + 1, tail)
 
-                if number >= 2:
+                if tail - head + 1 >= 2:
                     if substring == "":
-                        backtrace(substring + s[head:head + 2], number - 1, head + 2, tail)
+                        backtrace(s[head:head + 2], number - 1, head + 2, tail)
                     else:
                         backtrace(substring + "." + s[head:head + 2], number - 1, head + 2, tail)
-                if number >= 3 and int(s[head:head + 3]) <= 255:
+                if tail - head + 1 >= 3 and int(s[head:head + 3]) <= 255:
                     if substring == "":
-                        backtrace(substring + s[head:head + 3], number - 1, head + 3, tail)
+                        backtrace(s[head:head + 3], number - 1, head + 3, tail)
                     else:
                         backtrace(substring + "." + s[head:head + 3], number - 1, head + 3, tail)
         backtrace("",4,head,tail)
         return result
 solution = Solution()
-print(solution.restoreIpAddresses("25525511135"))
+print(solution.restoreIpAddresses("101023"))
