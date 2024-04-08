@@ -6,7 +6,7 @@ class UnionFind:
     def find(self, x):  # 寻找根节点
         root = x  # 刚开始各位为营，大家都是各自的老大
         while self.father[root] != None:
-            root = root.father
+            root = self.father[root]
         while x != root:  # 路径压缩
             origin_father = self.father[x]
             self.father[x] = root
@@ -41,3 +41,4 @@ class Solution(object):
             for j in range(i):
                 if isConnected[i][j]:
                     uf.merge(i, j)
+        return uf.num_of_sets
