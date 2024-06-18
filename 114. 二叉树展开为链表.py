@@ -32,5 +32,6 @@ node_2.left = node_3
 node_2.right = node_4
 node_5.right=node_6
 solution = Solution()
-print(solution.flatten(node_1).val)
-
+# print(solution.flatten(node_1))
+node_1.val = 2
+print(node_1.val)
