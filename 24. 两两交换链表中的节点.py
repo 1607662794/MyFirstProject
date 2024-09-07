@@ -11,16 +11,30 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        fore_node = head
+        # fore_node = head
+        # flag = 0
+        # while head != None and head.next != None:
+        #     if flag % 2 == 0:
+        #         value = head.val
+        #         head.val = head.next.val
+        #         head.next.val = value
+        #     head = head.next
+        #     flag += 1
+        # return fore_node
         flag = 0
-        while head != None and head.next != None:
-            if flag % 2 == 0:
-                value = head.val
-                head.val = head.next.val
-                head.next.val = value
-            head = head.next
+        dummy_node = List
+        current_node = head
+        while current_node:
             flag += 1
-        return fore_node
+            if flag % 2 != 0:
+                first_node = current_node
+            else:
+                second_node = current_node
+                first_node.next = second_node.next
+                second_node.next = first_node
+            current_node = current_node.next
+        return head
+
 
 
 solution = Solution()
@@ -32,4 +46,4 @@ a.next = b
 b.next = c
 c.next = d
 d.next = None
-print(solution.swapPairs(a).next.val)
+print(solution.swapPairs(a).val)

@@ -1,3 +1,6 @@
+import math
+
+
 class Solution(object):
     def numSquares(self, n):
         """
@@ -17,6 +20,7 @@ class Solution(object):
                 if j >= num:
                     dp[j] = min(dp[j], dp[j - num] + 1)
         return dp[n]
+
 
 
 solution = Solution()

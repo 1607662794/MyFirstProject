@@ -24,7 +24,7 @@ time_1 = time.time()
 # # 目录地址
 # print(os.path.isdir(os.getcwd()))
 # print("当前文件工作路径", os.getcwd())
-print("当前文件地址", __file__)
+# print("当前文件地址", __file__)
 # print("划分当前文件地址为后缀及文件名两部分", os.path.splitext(__file__)[0])
 # print("划分当前文件地址为后缀及文件名两部分", os.path.splitext(__file__)[1])
 # print("划分当前文件为后缀及文件名两部分", os.path.basename(__file__).split('.')[0])
@@ -48,6 +48,7 @@ print("当前文件地址", __file__)
 # # 数学运算
 # print("6/5向上取整；", math.ceil(6/5))
 # print("6/5向下取整；", math.floor(6/5))
+print('5的根号等于{}'.format(math.sqrt(5)))
 # print("6/5四舍五入；", round(6/5))
 # print("6/5四舍五入，并保留位数；", round(5 / 3, 6))
 
@@ -57,9 +58,15 @@ print("当前文件地址", __file__)
 # print("字母合并为单词",''.join(['a','b','c']))
 # print("移除字符串头头尾的指定字符，默认为空格，左删除为lstrip(),右删除为rstrip()","  Hello,World  ".strip())
 # print("计数{}".format("abc".count('a')))
+print("'abc是否是以a开头的".format('abc'.startswith('a')))
+print("'abc是否是以c开头的".format('abc'.endswith('c')))
+
 
 # # 本机配置
 # print("输出cpu的颗数", os.cpu_count())
+
+# 无穷大
+# print(math.inf)
 
 # # 字符 →→ ASCII码
 # print("1~9的ASCII分布：{}~{}".format(ord('1'), ord('9')))
@@ -71,11 +78,11 @@ print("当前文件地址", __file__)
 
 # json命令
 # python对象转换为json对象
-data = {'name': 'John', 'age': 30, 'city': 'New York'}
-json_string = json.dumps(data)
-print(json_string)
-json_string = json.dumps(data,indent=4)
-print(json_string)
+# data = {'name': 'John', 'age': 30, 'city': 'New York'}
+# json_string = json.dumps(data)
+# print(json_string)
+# json_string = json.dumps(data,indent=4)
+# print(json_string)
 
 # os读取文本txt
 # with open("example.txt", "r") as file:
@@ -179,26 +186,32 @@ print(json_string)
 # # 创建一个不同维度大小的数组，以杨辉三角为例
 # dp = [[1] * (i + 1) for i in range(5)]
 # print(dp)
+# # 列表相加的结果
+# a = [1, 2]
+# b = [3, 4]
+# print(a + b)#这种方式倒是和extend的功能挺像的。
 #
 # for i in range(2, 1):  # 如果这两个超参不合规律的话，并不会报错，只是不会执行。
 #     print('倒序不能输出')
 
 # 集合,可以看做是只有关键字的字典，无重复值，另外，对集合的查询或者修改要比列表快很多，这也是为什么很多题目可以用集合做
 # 不超时，而用列表做时，会超时
-a = [1, 2, 3, 2]
-a = set(a)
-print(a)
-a = (1, 2, 3, 2)
-a = set(a)
-print(a)
-a.add(5)
-print("集合{{1,2,3}}添加元素5后变成了{}".format(a))
+# a = [1, 2, 3, 2]
+# a = set(a)
+# print(a)
+# a = (1, 2, 3, 2)
+# a = set(a)
+# print(a)
+# a.add(5)
+# a.remove(1)
+# print("集合{{1,2,3}}添加元素5后变成了{}".format(a))
 
 
 # 元组
 # 元组是可读的，但是不能被修改
 # a = (1, 2, 3)
 # print(a)
+# print(a[1])
 
 # print(ord('0'))
 # # 整除与取余
@@ -242,7 +255,7 @@ print("集合{{1,2,3}}添加元素5后变成了{}".format(a))
 # 0000 0101  # 5的补码
 # 0000 0001  # 根据按位与的规则，得出补码结果，最后的补码结果需要先看符号位，决定是否先减1，变为反码，然后再变为原码
 # 任何数和0做异或运算，结果是自身
-print("0与任何数异或操作结果仍为那个数：{}".format(0 ^ 2))
+# print("0与任何数异或操作结果仍为那个数：{}".format(0 ^ 2))
 
 # # 匿名函数
 # func = lambda x, y: x * y
@@ -313,7 +326,7 @@ print("0与任何数异或操作结果仍为那个数：{}".format(0 ^ 2))
 # 注意，循环内的变量也是局部变量的一种。
 for i in range(2):
     print("当前循环下的i值为{}".format(i))
-print("循环结束后的i值为{}".format(i))
+print("循环结束后的i值为{}".format(i))  # 为1
 
 # # 列表计数
 # nums = [-1, -1, 1, 2, 3]  # 排序如果直接按照.count来计数的话会出现负数排序不正确的情况
@@ -322,14 +335,15 @@ print("循环结束后的i值为{}".format(i))
 # top_k = sorted(counter.keys(), key=lambda x: counter[x], reverse=True)[:2]
 # print(top_k)
 
-# #双向队列
+# # 双向队列
 # str = 'abc'
-# list_1 = [1,2,3]
+# list_1 = [1, 2, 3]
 # queue_1 = deque(str)
 # queue_2 = deque(list_1)
-# 右端加入
-# queue_1.append(4)#deque(['a', 'b', 'c', 4, 'k'])
-# queue_1.append('k')#deque([1, 2, 3])
+# # 右端加入
+# queue_1.append(4)  # deque(['a', 'b', 'c', 4, 'k'])
+# print(queue_1)
+# queue_1.append('k')  # deque([1, 2, 3])
 # 左端加入
 # queue_1.appendleft(4)#deque(['k', 4, 'a', 'b', 'c'])
 # queue_1.appendleft('k')#deque([1, 2, 3])
@@ -372,6 +386,9 @@ print("循环结束后的i值为{}".format(i))
 # print(q.get())  # 输出：3
 # print(q.get())  # 输出：2
 # print(q.get())  # 输出：1
+# if q.empty:
+#     print('q为空')
+# print('q的尺寸为{}'.format(q.qsize()))
 
 # # 堆
 # min_heap = []
@@ -392,8 +409,35 @@ print("循环结束后的i值为{}".format(i))
 # # 构建索引与值的字典
 # index = {element: i for i, element in enumerate(['a', 'b', 'c', 'd'])}
 
+# 二元组在小根堆中的存储顺序
+# example = [(1, 2), (3, 4), (2, 0)]
+# heapq.heapify(example)  # 注意，转换类型后不要对其进行赋值
+# print(example)  # 输出为[(1, 2), (3, 4), (2, 0)]，也就是说此时的顺序还没有发生改变。调用heapq.heapify()函数时，它会将列表转换成一个堆数据结构，但是这并不意味着列表会变成一个排序好的列表。但是可以确定的是，第一个元素一定是最小的
+# print(heapq.heappop(example))#弹出的时候是正常的
+# print(example)#弹出一个值后，后边的值顺序就会发生变化。
+# print(heapq.heappop(example))#弹出的时候是正常的
+# print(example[0])
+# example = [2, 1, 3]
+# heapq.heapify(example)
+# print(example)  # 此时的输出是排序后的结果
+
+
+# 在Python中使用heapq模块处理二元组（或任何元组）时，小根堆默认会根据元组的第一个元素进行排序。如果第一个元素相同，则会比较第二个元素
+# # 创建一个空的堆,
+# heap = []
+# # 元组包含(value, index)
+# data = [(3, 2), (1, 5), (2, 1), (3, 1)]
+# # 将数据压入堆中
+# for item in data:
+#     heapq.heappush(heap, item)
+# # 从堆中弹出最小的元素
+# while heap:
+#     print(heapq.heappop(heap))
+
 # # 字典操作
 # dict_pri = {'a': 1, 'b': 2, 'c': 3}
+# for i,w in enumerate(dict_pri):
+#     print('{}:{}'.format(i,w))#字典的遍历将会丢失其值。
 # del dict_pri['a']
 # print(dict_pri.get('a'))  # 返回指定键的值，如果值不在字典中返回default值，默认是None
 # if None:  # None值并不会被判定为False
@@ -406,13 +450,36 @@ print("循环结束后的i值为{}".format(i))
 # if 0:  # 条件判断0不会被执行
 #     print('Hello world')
 
+#正则表达
+# https://blog.csdn.net/guo_qingxia/article/details/113979135
+
 # # 张量运算
 # a = torch.tensor([1, 2, 3])
+# print(a.unsqueeze(-1))
 # b = torch.arange(0, 5).unsqueeze(dim=1)
 # print(b)
-# print(a.unsqueeze(-1))
+
+# view,变化张量形状，但是元素数量不变。
+
+# squeeze用于移除张量中所有大小为1的维度，当时我在训练自己的神经网络模型的时候就没有用到该函数。
+
+# cat和concat用于沿着某一维度将两个张量拼接起来
+
+# stack 用于在一个新的维度将两个张量拼接起来。
+#
+# # transpose交换维度
+# print(b.transpose(0,1))
+#
+# # 指数运算时，会将张量列表中的每一个元素都进行处理。
 # print(math.log(10))
-# print(torch.exp(torch.arange(5))*2)  # 指数运算时，会将张量列表中的每一个元素都进行处理。
-print(3 // 2)
+# print(torch.exp(torch.arange(5))*2)
+# print(3 // 2)
+#
+# # 上三角矩阵
+# shape = [4,10,10]
+# subsequence_mask = np.triu(np.ones(shape),k=1)  # 直接生成4个10*10的上三角矩阵。
+# subsequence_mask = torch.from_numpy(subsequence_mask).byte()
+# print(subsequence_mask)
+
 time_2 = time.time()
 print("花费时间", time_2 - time_1)
