@@ -9,40 +9,35 @@ class ListNode(object):
         self.next = next
 
 
-class Solution(object):
-    def reverse_linklist(self, head, k):
-        """注意，这里面的head指的是每k个节点组成的子链表，该函数的功能实现在于子链表的翻转"""
-        saved_list = []
-        fore_node = head
-        for i in range(k):
-            saved_list.append(head.val)
-            head = head.next
-        head = fore_node
-        for i in range(k):
-            head.val = saved_list[k - i - 1]
-            head = head.next
-
+class Solution:
     def reverseKGroup(self, head, k):
-        """
-        :type head: ListNode
-        :type k: int
-        :rtype: ListNode
-        """
-        length = 0
-        fore_node = head
-
-        while head != None:  # 判断输入链表有多长
-            length += 1
-            head = head.next
-
-        head = fore_node
-
-        for i in range(length // k):
-            self.reverse_linklist(head, k)
-            for _ in range(k):
+        number = 0
+        dummy = ListNode(0, head)
+        pre = dummy
+        left = head
+        while head:
+            number += 1
+            if number % k == 0:
+                tem = head.next
+                left, right = self.reverse(left, head, k)
+                pre.next = left
+                pre = right
+                head = tem
+                left = head
+                right.next = head
+            else:
                 head = head.next
+        return dummy.next
 
-        return fore_node
+    def reverse(self, left, right, k):
+        head = None
+        current_node = left
+        for i in range(k):
+            tem = current_node.next
+            current_node.next = head
+            head = current_node
+            current_node = tem
+        return (right, left)
 
 
 solution = Solution()
@@ -54,4 +49,4 @@ a.next = b
 b.next = c
 c.next = d
 d.next = None
-print(solution.reverseKGroup(a, 2).next.val)
+print(solution.reverseKGroup(a, 2))
