@@ -9,6 +9,8 @@ import statistics
 import time
 from functools import reduce
 import heapq
+
+import numpy
 import numpy as np
 import pandas as pd
 import torch
@@ -48,9 +50,11 @@ time_1 = time.time()
 # # 数学运算
 # print("6/5向上取整；", math.ceil(6/5))
 # print("6/5向下取整；", math.floor(6/5))
-print('5的根号等于{}'.format(math.sqrt(5)))
+# print('5的根号等于{}'.format(math.sqrt(5)))
 # print("6/5四舍五入；", round(6/5))
 # print("6/5四舍五入，并保留位数；", round(5 / 3, 6))
+# print("[1,2,3]的平均数为{}".format(numpy.average([1,2,3])))#[1,2,3]的平均数为2.0,numpy.float64
+# print("[1,2,3]的平均数为{}".format(statistics.mean([1,2,3])))#[1,2,3]的平均数为2
 
 # # 常见操作
 # print("字符串分割，括号内的形参可以指定个数","abc".split())
@@ -58,8 +62,8 @@ print('5的根号等于{}'.format(math.sqrt(5)))
 # print("字母合并为单词",''.join(['a','b','c']))
 # print("移除字符串头头尾的指定字符，默认为空格，左删除为lstrip(),右删除为rstrip()","  Hello,World  ".strip())
 # print("计数{}".format("abc".count('a')))
-print("'abc是否是以a开头的".format('abc'.startswith('a')))
-print("'abc是否是以c开头的".format('abc'.endswith('c')))
+# print("'abc是否是以a开头的".format('abc'.startswith('a')))
+# print("'abc是否是以c开头的".format('abc'.endswith('c')))
 
 
 # # 本机配置
@@ -162,6 +166,8 @@ print("'abc是否是以c开头的".format('abc'.endswith('c')))
 # print(scores)
 # a = np.arange(1,7).reshape(2,3)
 
+data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_time_appended.csv", delimiter=',', skip_header=1, dtype=[('image_names', 'U50'), ('u [mm]', float), ('Fh [kN]', float), ('times [s]', int)])
+
 # file = open("example.txt", "r+")
 # print(file.read())
 # file.close()
@@ -194,6 +200,13 @@ print("'abc是否是以c开头的".format('abc'.endswith('c')))
 # for i in range(2, 1):  # 如果这两个超参不合规律的话，并不会报错，只是不会执行。
 #     print('倒序不能输出')
 
+# # range的循环次数在第一次计算结束后就确定了，并不会因为列表的变化而变化
+# a = [1,2,3]
+# for i in range(len(a)):
+#     a.append(1)
+#     print("循环次数{}".format(i))
+
+
 # 集合,可以看做是只有关键字的字典，无重复值，另外，对集合的查询或者修改要比列表快很多，这也是为什么很多题目可以用集合做
 # 不超时，而用列表做时，会超时
 # a = [1, 2, 3, 2]
@@ -203,13 +216,13 @@ print("'abc是否是以c开头的".format('abc'.endswith('c')))
 # a = set(a)
 # print(a)
 # a.add(5)
-# a.remove(1)
+# a.remove(1)#删除元素
 # print("集合{{1,2,3}}添加元素5后变成了{}".format(a))
 
 
 # 元组
 # 元组是可读的，但是不能被修改
-# a = (1, 2, 3)
+# a = (1, 2, 3)#不使用set的话，是元组，而不是集合。
 # print(a)
 # print(a[1])
 
@@ -260,7 +273,7 @@ print("'abc是否是以c开头的".format('abc'.endswith('c')))
 # # 匿名函数
 # func = lambda x, y: x * y
 # print(func(1, 2))
-# print(list(map(func, [1, 2], [3, 4])))  # map(function, iterable, ...),python3中返回的是一个迭代器
+# print(list(map(func, [1, 2], [3, 4])))  # map(function, iterable, ...),python3中返回的是一个迭代器，返回[3,8]
 # print(list(filter(lambda x: x % 2 == 0, [1, 2, 3, 4, 5])))  # filter(function, iterable)
 # print(reduce(lambda x, y: x * y, [1, 2, 3, 4, 5]))  # educe() 函数会对参数序列中元素进行累积。
 # # 函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。
@@ -322,15 +335,31 @@ print("'abc是否是以c开头的".format('abc'.endswith('c')))
 # print(list(map(str, [1, 2, 3])))
 # print("python中是可以进行字符串比较大小的。".format('123' < '23'))
 
+# 技巧
+# 字符串从左边开始向右比较
+a = ['123','23','124']
+a.sort(key = lambda x:(x*10)[:10])
+print(a)
+
+#计算约数
+# def count_divisors_up_to_r(r):
+#     divisor_counts = [0] * (r + 1)  # 创建一个长度为 r+1 的列表来存储每个数的约数数量
+#
+#     for i in range(1, r + 1):
+#         for j in range(i, r + 1, i):
+#             divisor_counts[j] += 1  # 增加每个 i 的倍数的约数数量
+#
+#     return divisor_counts[1:]  # 返回从 1 到 r 的约数数量列表
+
 # for 循环
 # 注意，循环内的变量也是局部变量的一种。
-for i in range(2):
-    print("当前循环下的i值为{}".format(i))
-print("循环结束后的i值为{}".format(i))  # 为1
+# for i in range(2):
+#     print("当前循环下的i值为{}".format(i))
+# print("循环结束后的i值为{}".format(i))  # 为1
 
 # # 列表计数
 # nums = [-1, -1, 1, 2, 3]  # 排序如果直接按照.count来计数的话会出现负数排序不正确的情况
-# counter = Counter(nums)
+# counter = Counter(nums)#并且是值默认为零。主要包不包含关系可以直接通过比较大小得到，而collections.defaultdict(int)无法进行比较。
 # print(counter)
 # top_k = sorted(counter.keys(), key=lambda x: counter[x], reverse=True)[:2]
 # print(top_k)
