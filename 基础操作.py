@@ -270,6 +270,27 @@ data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_tim
 # 任何数和0做异或运算，结果是自身
 # print("0与任何数异或操作结果仍为那个数：{}".format(0 ^ 2))
 
+#补码显示
+def int_to_16bit_binary(n):
+    # 定义16比特的范围
+    MIN_VALUE = -32768
+    MAX_VALUE = 32767
+
+    # 限制输入范围
+    if n < MIN_VALUE:
+        n = MIN_VALUE
+    elif n > MAX_VALUE:
+        n = MAX_VALUE
+
+    # 转换为补码
+    if n < 0:
+        n = (1 << 16) + n  # 负数的补码表示
+
+    # 转换为二进制字符串，填充至16位
+    binary_representation = format(n, '016b')
+
+    return binary_representation
+
 # # 匿名函数
 # func = lambda x, y: x * y
 # print(func(1, 2))
