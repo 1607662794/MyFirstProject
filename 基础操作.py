@@ -1,6 +1,7 @@
 # 该文档用于我练手的一些代码，包括字典排序，文件读取等。
 # coding:utf-8
 import collections
+import copy
 
 import csv
 import math
@@ -19,6 +20,7 @@ from collections import Counter
 from collections import deque
 import queue
 import json
+from itertools import zip_longest
 
 # 时间函数
 time_1 = time.time()
@@ -71,6 +73,7 @@ time_1 = time.time()
 
 # 无穷大
 # print(math.inf)
+# print(-math.inf)
 
 # # 字符 →→ ASCII码
 # print("1~9的ASCII分布：{}~{}".format(ord('1'), ord('9')))
@@ -166,15 +169,21 @@ time_1 = time.time()
 # print(scores)
 # a = np.arange(1,7).reshape(2,3)
 
-data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_time_appended.csv", delimiter=',', skip_header=1, dtype=[('image_names', 'U50'), ('u [mm]', float), ('Fh [kN]', float), ('times [s]', int)])
+data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_time_appended.csv", delimiter=',',
+                     skip_header=1,
+                     dtype=[('image_names', 'U50'), ('u [mm]', float), ('Fh [kN]', float), ('times [s]', int)])
 
 # file = open("example.txt", "r+")
 # print(file.read())
 # file.close()
 
+# 函数any
+# print(any([1, 2, 3, 0]))  # 返回True
+
+
 # # 列表
 # print([1, 2, 3, 4])
-#
+# print([1, 2, 3, 4][-1:2:-1])#返回[4]切片，负数代表从右向左切
 # a = [1, 2, 3, 4]
 # a.remove(2)
 # print(a)  # 删除值
@@ -216,7 +225,7 @@ data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_tim
 # a = set(a)
 # print(a)
 # a.add(5)
-# a.remove(1)#删除元素
+# a.remove(1)  # 删除元素
 # print("集合{{1,2,3}}添加元素5后变成了{}".format(a))
 
 
@@ -226,7 +235,7 @@ data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_tim
 # print(a)
 # print(a[1])
 
-# print(ord('0'))
+
 # # 整除与取余
 # print("整除4//3得{}".format(4//3))
 # print("取余4%3得{}".format(4 % 3))
@@ -243,7 +252,7 @@ data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_tim
 # # 字典按照value和key排列
 # d = {'a': 1, 'b': 4, 'c': 2}
 #
-# print(sorted(d.items(), key=lambda x: x[1], reverse=True))
+# print(sorted(d.items(), key=lambda x: x[1], reverse=True)) # [('b', 4), ('c', 2), ('a', 1)]
 # print(sorted(d.items(), key=lambda x: x[0], reverse=True))  # 匿名函数
 # d ={[1,2,3]:1} #因为哈希的关键字是不能变的，因此这儿采用列表的话，就会出问题。
 
@@ -270,7 +279,7 @@ data = np.genfromtxt(r"E:\Code\Hysteretic curve processing\sampling_data\RS3_tim
 # 任何数和0做异或运算，结果是自身
 # print("0与任何数异或操作结果仍为那个数：{}".format(0 ^ 2))
 
-#补码显示
+# 补码显示
 def int_to_16bit_binary(n):
     # 定义16比特的范围
     MIN_VALUE = -32768
@@ -291,12 +300,13 @@ def int_to_16bit_binary(n):
 
     return binary_representation
 
+
 # # 匿名函数
 # func = lambda x, y: x * y
 # print(func(1, 2))
 # print(list(map(func, [1, 2], [3, 4])))  # map(function, iterable, ...),python3中返回的是一个迭代器，返回[3,8]
 # print(list(filter(lambda x: x % 2 == 0, [1, 2, 3, 4, 5])))  # filter(function, iterable)
-# print(reduce(lambda x, y: x * y, [1, 2, 3, 4, 5]))  # educe() 函数会对参数序列中元素进行累积。
+# print(reduce(lambda x, y: x * y, [1, 2, 3, 4, 5]))  # reduce() 函数会对参数序列中元素进行累积。
 # # 函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。
 # print('[1,2,3,4,4]列表的众数为:', statistics.mode([1, 2, 3, 4, 4]))
 
@@ -313,6 +323,8 @@ def int_to_16bit_binary(n):
 # print("百分比{:.2%}".format(1.22225))
 # print("左边填充0,注意只有整数可以{:0>8d}".format(1))
 # print("左边填充x,注意只有整数可以{:x>8d}".format(1))
+# print("20的八进制表示{:o}".format(20))
+# print("20的16进制表示{:x}".format(20))
 # print()
 
 # ACM模式
@@ -351,18 +363,18 @@ def int_to_16bit_binary(n):
 # print("a的后两个元素进行切片颠倒，然后子列表进行赋值，也是可以的，结果为{}".format(a))
 
 # # 基础运算
-# print("对数函数".format(math.log(100, 10)))
+# print("对数函数{}".format(math.log(100, 10)))  # 2.0
 # print(str([1, 2, 3]))
 # print(list(map(str, [1, 2, 3])))
 # print("python中是可以进行字符串比较大小的。".format('123' < '23'))
 
 # 技巧
 # 字符串从左边开始向右比较
-a = ['123','23','124']
-a.sort(key = lambda x:(x*10)[:10])
+a = ['123', '23', '124']
+a.sort(key=lambda x: (x * 10)[:10])
 print(a)
 
-#计算约数
+# 计算约数
 # def count_divisors_up_to_r(r):
 #     divisor_counts = [0] * (r + 1)  # 创建一个长度为 r+1 的列表来存储每个数的约数数量
 #
@@ -496,11 +508,66 @@ print(a)
 # print(dict_pri.keys())  # 以列表返回一个字典所有的键
 # print(dict_pri.values())  # 以列表返回字典中的所有值
 
+# 对于类型值的判断
+a = 1
+print(type(a) == int)  # True, 在进行类别判断的时候，不需要加入引号，
+print(type(a) == 'int')  # False, 在进行类别判断的时候，不需要加入引号，
+
+# 打包函数，按照两个序列的最大长度来。
+x = [1, 1, 2]
+y = [1, 2]
+for a, b in zip_longest(x, y, fillvalue=0):  # 注意在itertools库中导入该工具。
+    print(a, b)
+
+# 打包函数，默认是按照两个序列的较短长度来的。
+for a, b in zip(x, y):
+    print(a, b)
+
+# strip()函数，注意其并非原地操作，若要改变值的话，需要额外赋值。
+a = ' abs c '
+print(a.strip())
+# strip函数同样可以对特定字符进行删除
+a = 'avs'
+print(a.strip('s'))
+
+# 局部变量
+a = 1
+
+
+def func(x):
+    x = 2
+
+
+func(a)
+print(a)  # 输出1
+
+b = [1]  # 列表是可变对象，因此，在接下来的传递过程中，传递给函数形参的是对列表对象的引用，因此在函数内部对列表对象的操作会同时影响到列表本身。
+
+
+def func(x):
+    x.append(2)
+
+
+func(b)
+print(b)  # 输出[1,2]
 
 # if 0:  # 条件判断0不会被执行
 #     print('Hello world')
 
-#正则表达
+# 二维列表的复制
+matrix = [[1, 2], [3, 4]]
+copy_matrix = [[matrix[i][j] for j in range(len(matrix[0]))] for i in range(len(matrix))]
+
+# 拷贝
+a = [1, 2]
+b = copy.copy(a)
+c = copy.deepcopy(a)
+
+# split函数
+a = 'da ad  das'
+print(a.split())  # 如果不指定的话，会以默认符号进行分割。
+
+# 正则表达
 # https://blog.csdn.net/guo_qingxia/article/details/113979135
 
 # # 张量运算
